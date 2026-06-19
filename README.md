@@ -32,6 +32,12 @@ Un fichier **index.html** est fourni avec une interface interactive pour tester 
 
 ## 📦 Installation
 Copiez le fichier **dungeon-generator.js** dans votre projet.
+
+## Cloner le dépôt
+```bash
+git clone https://github.com/sebastienbats/procedural-dungeon-generator-library.git
+cd procedural-dungeon-generator-library
+```
 ### Utilisation comme module ES6 :
 ```html
 <script type="module">
