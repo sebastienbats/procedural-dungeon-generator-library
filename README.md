@@ -1,5 +1,5 @@
 # 🏰 Générateur de Donjon Procédural
-Une bibliothèque JavaScript modulaire, sans dépendance, pour la génération procédurale de donjons avec rendu SVG.
+** Une bibliothèque JavaScript modulaire, sans dépendance, pour la génération procédurale de donjons avec rendu SVG. **
 Inspirée de Gridmapper, elle propose un ensemble riche d’algorithmes, de tuiles personnalisables, de calques, d’annotations, de barre d’échelle, d’annulation/rétablissement, d’export et d’impression.
 
 ## ✨ Fonctionnalités
