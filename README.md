@@ -1,36 +1,36 @@
 # 🏰 Générateur de Donjon Procédural
-** Une bibliothèque JavaScript modulaire, sans dépendance, pour la génération procédurale de donjons avec rendu SVG. **
+**Une bibliothèque JavaScript modulaire, sans dépendance, pour la génération procédurale de donjons avec rendu SVG.**
 Inspirée de Gridmapper, elle propose un ensemble riche d’algorithmes, de tuiles personnalisables, de calques, d’annotations, de barre d’échelle, d’annulation/rétablissement, d’export et d’impression.
 
 ## ✨ Fonctionnalités
 ### Algorithmes de génération (7 intégrés)
-- 🏠 Salles + couloirs en L – salles rectangulaires classiques et couloirs en L.
-- 🌳 BSP – partitionnement binaire de l’espace pour des agencements hiérarchiques.
-- 🌀 Couloirs sinueux – chemins aléatoires sinueux avec salles occasionnelles.
-- 🕳️ Automates cellulaires – structures organiques de type caverne (règle B4/S3).
-- 🚶 Drunkard’s Walk – marches aléatoires multiples qui creusent des tunnels.
-- 🌿 DLA Central Attractor – agrégation limitée par diffusion, structures dendritiques.
-- 🔄 DLA Symmetry – DLA avec symétrie axiale (x, y ou les deux).
-- 📐 Graph Grammar (avancé) – réécriture de graphe avec règles personnalisables, supportant :
+- **🏠 Salles + couloirs en L** – salles rectangulaires classiques et couloirs en L.
+- **🌳 BSP** – partitionnement binaire de l’espace pour des agencements hiérarchiques.
+- **🌀 Couloirs sinueux** – chemins aléatoires sinueux avec salles occasionnelles.
+- **🕳️ Automates cellulaires** – structures organiques de type caverne (règle B4/S3).
+- **🚶 Drunkard’s Walk** – marches aléatoires multiples qui creusent des tunnels.
+- **🌿 DLA Central Attractor** – agrégation limitée par diffusion, structures dendritiques.
+- **🔄 DLA Symmetry** – DLA avec symétrie axiale (x, y ou les deux).
+- **📐 Graph Grammar (avancé)** – réécriture de graphe avec règles personnalisables, supportant :
   - Salles en enfilade, symétries axiales/rotationnelles, niveaux hiérarchiques.
   - Couloirs larges, couloirs avec portes, passages secrets.
   - Règles entièrement redéfinissables par l’utilisateur.
 
 ### Fonctionnalités avancées
-- Calques superposés – sol, murs, objets, annotations, couloirs… ajoutez vos propres calques.
-- Tuiles personnalisées – définissez vos propres types avec couleurs et icônes (emojis/Unicode).
-- Annotations – placez du texte (étiquettes) n’importe où.
-- Barre d’échelle – affichez une échelle métrique ou personnalisée.
-- Annuler / Rétablir – historique complet des modifications.
-- Export – sauvegardez en SVG vectoriel ou PNG (via canvas).
-- Impression – ouvrez une fenêtre optimisée pour l’impression.
-- Zéro dépendance – 100% JavaScript pur, compatible avec tous les navigateurs modernes.
+- **Calques superposés** – sol, murs, objets, annotations, couloirs… ajoutez vos propres calques.
+- **Tuiles personnalisées** – définissez vos propres types avec couleurs et icônes (emojis/Unicode).
+- **Annotations** – placez du texte (étiquettes) n’importe où.
+- **Barre d’échelle** – affichez une échelle métrique ou personnalisée.
+- **Annuler / Rétablir** – historique complet des modifications.
+- **Export** – sauvegardez en SVG vectoriel ou PNG (via canvas).
+- **Impression** – ouvrez une fenêtre optimisée pour l’impression.
+- **Zéro dépendance** – 100% JavaScript pur, compatible avec tous les navigateurs modernes.
 
 ## 🎮 Démo en ligne
-Un fichier index.html est fourni avec une interface interactive pour tester tous les algorithmes et paramètres. Ouvrez-le simplement dans votre navigateur.
+Un fichier **index.html** est fourni avec une interface interactive pour tester tous les algorithmes et paramètres. Ouvrez-le simplement dans votre navigateur.
 
 ## 📦 Installation
-Copiez le fichier dungeon-generator.js dans votre projet.
+Copiez le fichier **dungeon-generator.js** dans votre projet.
 ### Utilisation comme module ES6 :
 ```html
 <script type="module">
@@ -119,13 +119,15 @@ new DungeonGenerator(options)
 C’est l’algorithme le plus flexible. Il démarre avec un nœud racine et applique itérativement des règles de transformation sur le graphe. La bibliothèque fournit un ensemble de règles avancées (enfilade, symétrie, hiérarchie, couloirs larges, portes, etc.) que vous pouvez étendre ou remplacer entièrement.
 Paramètres : iterations, spacing, maxNodes, startType, rules (tableau de fonctions)
 Le contexte passé à chaque règle donne accès à :
-- node – le nœud courant
-- createNode(x, y, type, level) – ajoute une nouvelle salle (nœud)
-- addCorridor(nodeA, nodeB, type, props) – trace un couloir (type : 'standard', 'large', 'door', 'secret')
-- addSymmetrical(node, axis) – crée des symétriques
-- findFreeDirection(node) – trouve une direction libre pour une nouvelle salle
-- isPositionFree(x, y) – vérifie si une position est libre
-- Accès direct aux calques (solLayer, murLayer, corridorLayer) et aux dimensions (w, h)
+- **node** – le nœud courant
+- **createNode(x, y, type, level)** – ajoute une nouvelle salle (nœud)
+- **addCorridor(nodeA, nodeB, type, props)** – trace un couloir (type : 'standard', 'large', 'door', 'secret')
+- **addSymmetrical(node, axis)** – crée des symétriques
+- **findFreeDirection(node)** – trouve une direction libre pour une nouvelle salle
+- **isPositionFree(x, y)** – vérifie si une position est libre
+- **solLayer, murLayer, corridorLayer** : calques pour dessiner
+- **w, h** : dimensions du donjon
+- **spacing** : espacement entre les salles
 
 ## 🎨 Personnalisation
 ### Tuiles personnalisées
