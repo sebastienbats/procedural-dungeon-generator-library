@@ -1,5 +1,6 @@
 # 🏰 Générateur de Donjon Procédural
 **Une bibliothèque JavaScript modulaire, sans dépendance, pour la génération procédurale de donjons avec rendu SVG.**
+
 Inspirée de Gridmapper, elle propose un ensemble riche d’algorithmes, de tuiles personnalisables, de calques, d’annotations, de barre d’échelle, d’annulation/rétablissement, d’export et d’impression.
 
 ## ✨ Fonctionnalités
@@ -165,16 +166,16 @@ dungeon.generate('graph-grammar', {
 ```
 ## 🧭 Architecture du projet
 La bibliothèque repose sur une classe unique DungeonGenerator. Ses composants principaux sont :
-- Registre des tuiles – associe chaque type de tuile à une couleur et éventuellement une icône.
-- Système de calques – chaque calque contient un tableau d’objets tuile et un indicateur de visibilité.
-- Historique – sauvegarde des états de tous les calques pour annuler/rétablir.
-- Registre des générateurs – un dictionnaire de fonctions de génération nommées.
-- Moteur de rendu SVG – transforme les tuiles en éléments SVG.
-- Export / Impression – sérialisation du SVG ou rendu sur canvas.
-Le moteur Graph Grammar utilise un graphe interne de nœuds (salles) et applique des fonctions de règles qui peuvent modifier à la fois le graphe et les calques de tuiles.
+- **Registre des tuiles** – associe chaque type de tuile à une couleur et éventuellement une icône.
+- **Système de calques** – chaque calque contient un tableau d’objets tuile et un indicateur de visibilité.
+- **Historique** – sauvegarde des états de tous les calques pour annuler/rétablir.
+- **Registre des générateurs** – un dictionnaire de fonctions de génération nommées.
+- **Moteur de rendu SVG** – transforme les tuiles en éléments SVG.
+- **Export / Impression** – sérialisation du SVG ou rendu sur canvas.
+Le moteur **Graph Grammar** utilise un graphe interne de nœuds (salles) et applique des fonctions de règles qui peuvent modifier à la fois le graphe et les calques de tuiles.
 
 ## 📄 Exemple complet
-Un fichier index.html est fourni avec une démo interactive comportant tous les contrôles et la sélection d’algorithme.
+Un fichier **index.html** est fourni avec une démo interactive comportant tous les contrôles et la sélection d’algorithme.
 
 ## 📜 Licence
 MIT © Sébastien BATS
