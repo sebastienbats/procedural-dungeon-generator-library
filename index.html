@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Générateur de donjon</title>
+  <style>
+    body { font-family: sans-serif; text-align: center; padding: 20px; background: #2c3e50; color: #ecf0f1; }
+    h1 { margin-bottom: 10px; }
+    #controls { margin-bottom: 15px; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+    button, select { padding: 8px 15px; border: none; border-radius: 4px; background: #34495e; color: #ecf0f1; cursor: pointer; }
+    button:hover, select:hover { background: #3d566e; }
+    #map { display: inline-block; border: 2px solid #ecf0f1; background: #f0ece6; }
+    #info { margin-top: 10px; font-size: 0.9em; color: #bdc3c7; }
+  </style>
+</head>
+<body>
+  <h1>🏰 Générateur de donjon procédural</h1>
+  <div id="controls">
+    <select id="algo-select">
+      <option value="rooms">Salles + couloirs (L)</option>
+      <option value="bsp">BSP</option>
+      <option value="sinuous">Couloirs sinueux</option>
+      <option value="cellular">Automates cellulaires</option>
+      <option value="drunkard">Drunkard's Walk</option>
+      <option value="dla">DLA Central Attractor</option>
+      <option value="dla-symmetry">DLA Symmetry</option>
+      <option value="graph-grammar">Graph Grammar (avancé)</option>
+    </select>
+    <button id="generate-btn">Générer</button>
+    <button id="undo-btn">Annuler</button>
+    <button id="redo-btn">Rétablir</button>
+    <button id="export-svg">Exporter SVG</button>
+    <button id="export-png">Exporter PNG</button>
+    <button id="print-btn">Imprimer</button>
+    <button id="scale-toggle">Afficher/masquer échelle</button>
+  </div>
+  <div id="map" style="width:800px;height:600px;"></div>
+  <div id="info">Cliquez sur "Générer" pour créer un nouveau donjon.</div>
+
+  <script type="module">
+    import { DungeonGenerator } from './dungeon-generator.js';
+
+    // Tuiles personnalisées
+    const customTiles = [
+      { id: 'trésor', color: '#f1c40f', label: 'Trésor', icon: '💰' },
+      { id: 'piège', color: '#e74c3c', label: 'Piège', icon: '⚔️' },
+      { id: 'escalier', color: '#9b59b6', label: 'Escalier', icon: '⬆️' }
+    ];
+
+    const dungeon = new DungeonGenerator({
+      container: document.getElementById('map'),
+      tileSize: 32,
+      width: 40,
+      height: 30,
+      customTileTypes: customTiles
+    });
+
+    dungeon.addAnnotation(5, 5, 'Entrée', '#2c3e50', 14);
+
+    function generate() {
+      const algo = document.getElementById('algo-select').value;
+      let params = {};
+      switch (algo) {
+        case 'rooms':
+          params = { numRooms: 10, minRoomSize: 3, maxRoomSize: 6 };
+          break;
+        case 'bsp':
+          params = { minRoomSize: 4, maxRoomSize: 8, maxDepth: 6 };
+          break;
+        case 'sinuous':
+          params = { steps: 300, turnProbability: 0.3, roomProbability: 0.04, minRoomSize: 2, maxRoomSize: 4 };
+          break;
+        case 'cellular':
+          params = { density: 0.45, iterations: 4, birthLimit: 4, deathLimit: 3 };
+          break;
+        case 'drunkard':
+          params = { steps: 600, walkers: 3, roomChance: 0.02, directionChange: 0.3, boundary: 2 };
+          break;
+        case 'dla':
+          params = { particles: 300, radius: 5, spawnRadius: 20, maxAttempts: 1000 };
+          break;
+        case 'dla-symmetry':
+          params = { particles: 300, radius: 5, spawnRadius: 20, symmetry: 'both', maxAttempts: 1000 };
+          break;
+        case 'graph-grammar':
+          params = { iterations: 12, spacing: 4, maxNodes: 200, startType: 'sol' };
+          break;
+      }
+      dungeon.generate(algo, params, true);
+    }
+
+    // Événements
+    document.getElementById('generate-btn').addEventListener('click', generate);
+    document.getElementById('undo-btn').addEventListener('click', () => dungeon.undo());
+    document.getElementById('redo-btn').addEventListener('click', () => dungeon.redo());
+    document.getElementById('export-svg').addEventListener('click', () => dungeon.exportSVG());
+    document.getElementById('export-png').addEventListener('click', () => dungeon.exportPNG());
+    document.getElementById('print-btn').addEventListener('click', () => dungeon.print());
+
+    let scaleVisible = true;
+    document.getElementById('scale-toggle').addEventListener('click', () => {
+      scaleVisible = !scaleVisible;
+      dungeon.setScale(scaleVisible, 'm', 10);
+    });
+
+    generate();
+  </script>
+</body>
+</html>
